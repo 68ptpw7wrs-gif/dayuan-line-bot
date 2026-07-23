@@ -1,6 +1,6 @@
 const express = require("express");
 const { messagingApi, middleware } = require("@line/bot-sdk");
-const { createReply } = require("./reply");
+const { createMessages } = require("./reply");
 
 const channelSecret = process.env.LINE_CHANNEL_SECRET;
 const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN;
@@ -34,14 +34,14 @@ async function handleEvent(event) {
     return;
   }
 
-  const replyText = createReply(event.message.text);
-  if (!replyText) {
+  const messages = createMessages(event.message.text);
+  if (!messages) {
     return;
   }
 
   await client.replyMessage({
     replyToken: event.replyToken,
-    messages: [{ type: "text", text: replyText }]
+    messages
   });
 }
 
