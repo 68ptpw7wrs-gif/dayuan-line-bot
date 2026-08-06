@@ -16,7 +16,7 @@ const port = Number(process.env.PORT) || 3000;
 const client = new messagingApi.MessagingApiClient({ channelAccessToken });
 
 app.get("/", (_req, res) => {
-  res.status(200).send("LINE bot is running");
+  res.status(200).send("LINE bot is running - registration-prefix-v2");
 });
 
 function secretsMatch(provided, expected) {
